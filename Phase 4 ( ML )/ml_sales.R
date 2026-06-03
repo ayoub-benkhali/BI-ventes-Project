@@ -1,6 +1,16 @@
 # ============================================================
 # PHASE 4 - MACHINE LEARNING (FAST VERSION)
 # ============================================================
+install.packages("RPostgres")
+install.packages("DBI")
+install.packages("dplyr")
+install.packages("ggplot2")
+install.packages("caret")
+install.packages("randomForest")
+install.packages("rpart")
+install.packages("gbm")
+install.packages("Metrics")
+
 
 library(RPostgres)
 library(DBI)
