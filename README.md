@@ -211,7 +211,7 @@ SELECT COUNT(*) FROM fact_sales;
 
 ```bash
 cd Phase 4 ( ML )
-ml_script.R
+ml_sales.R
 ```
 
 ---
