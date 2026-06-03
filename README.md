@@ -64,14 +64,14 @@ Source de données
 
 ## 🛠️ Technologies utilisées
 
-| Composant        | Technologie                  |
-|------------------|------------------------------|
-| Base de données  | PostgreSQL                   |
-| ETL              | Talend Open Studio           |
+| Composant        | Technologie                   |
+|------------------|-------------------------------|
+| Base de données  | PostgreSQL                    |
+| ETL              | Talend Open Studio            |
 | Modélisation DW  | Schéma en étoile (Star Schema)|
-| Machine Learning | Python (scikit-learn, pandas)|
-| Reporting        | Dashboard (Phase 3)          |
-| Versioning       | Git / GitHub                 |
+| Machine Learning | R (caret, ggplot2, dplyr)     |
+| Reporting        | Dashboard (Phase 3)           |
+| Versioning       | Git / GitHub                  |
 
 ---
 
@@ -80,13 +80,15 @@ Source de données
 Le Data Warehouse `dw_retail` est structuré autour d'une **table de faits** et de plusieurs **tables de dimensions** :
 
 ```
-         DIM_CLIENT
-              │
-DIM_PRODUIT ──┤
-              │
-         FACT_SALES ──── DIM_DATE
-              │
-DIM_MAGASIN ──┘
+            DIM_CLIENT
+                │
+DIM_PRODUIT ────┤
+                │
+           FACT_SALES ──── DIM_DATE
+                │
+DIM_STORE ──────┤
+                │
+DIM_SHIPMENTS ──┘
 ```
 
 **Tables principales :**
@@ -94,7 +96,8 @@ DIM_MAGASIN ──┘
 - `DIM_DATE` — Dimension temporelle (jour, mois, trimestre, année)
 - `DIM_PRODUIT` — Informations produits (catégorie, famille, prix)
 - `DIM_CLIENT` — Informations clients (segment, région)
-- `DIM_MAGASIN` — Informations points de vente (ville, région)
+- `DIM_STORE` — Informations points de vente (ville, région)
+- `DIM_SHIPMENTS` — Informations de livraison (mode d'expédition, délai, statut)
 
 ---
 
@@ -107,7 +110,7 @@ Assure-toi d'avoir installé les outils suivants :
 - [Git](https://git-scm.com/) ≥ 2.x
 - [PostgreSQL](https://www.postgresql.org/download/) ≥ 13
 - [Talend Open Studio for Data Integration](https://www.talend.com/products/talend-open-studio/) (gratuit)
-- [Python](https://www.python.org/) ≥ 3.8 (pour la phase ML)
+- [R](https://www.r-project.org/) ≥ 4.0 (pour la phase ML)
 
 ---
 
@@ -135,7 +138,15 @@ Puis exécute le script de création du schéma :
 psql -U postgres -d dw_retail -f "DW creat script/create_dw.sql"
 ```
 
+Ensuite, exécute le script de remplissage de la dimension date :
+
+```bash
+psql -U postgres -d dw_retail -f "DW creat script/insert_dim_date.sql"
+```
+
 > 💡 **Remarque :** Remplace `postgres` par ton nom d'utilisateur PostgreSQL si différent.
+
+> 🔴 **IMPORTANT :** Avant d'exécuter les jobs ETL, remplace le schéma du fichier `orders.csv` par ton schéma réel selon la structure de tes données sources.
 
 ---
 
@@ -160,8 +171,9 @@ Dans Talend, exécute les jobs dans l'ordre suivant :
 1. Job_DIM_DATE
 2. Job_DIM_PRODUIT
 3. Job_DIM_CLIENT
-4. Job_DIM_MAGASIN
-5. Job_FACT_SALES
+4. Job_DIM_STORE
+5. Job_DIM_SHIPMENTS
+6. Job_FACT_SALES
 ```
 
 ---
@@ -172,17 +184,18 @@ Dans Talend, exécute les jobs dans l'ordre suivant :
 -- Vérification dans PostgreSQL
 SELECT COUNT(*) FROM dim_date;
 SELECT COUNT(*) FROM dim_produit;
+SELECT COUNT(*) FROM dim_store;
+SELECT COUNT(*) FROM dim_shipments;
 SELECT COUNT(*) FROM fact_sales;
 ```
 
 ---
 
-### Étape 6 — Phase ML (optionnel)
+### Étape 6 — Phase ML
 
 ```bash
 cd "Phase 4 ( ML )"
-pip install -r requirements.txt
-python main.py
+Rscript main.R
 ```
 
 ---
