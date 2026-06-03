@@ -130,7 +130,7 @@ Assure-toi d'avoir installé les outils suivants :
 ### Étape 1 — Cloner le dépôt
 
 ```bash
-git clone https://github.com/majdzouaoui/BI-ventes-Project
+git clone https://github.com/ayoub-benkhali/BI-ventes-Project
 cd BI-ventes-Project
 ```
 
