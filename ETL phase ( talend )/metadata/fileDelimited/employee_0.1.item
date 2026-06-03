@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TalendMetadata="http://www.talend.org/metadata/connection/2010" xmlns:orgomg.cwm.resource.record="http:///orgomg/cwm/resource/record.ecore">
+  <TalendMetadata:DelimitedFileConnection xmi:id="_meUjUFt4EfGVWtQz8uGegQ" name="employee" dataPackage="_meUjUVt4EfGVWtQz8uGegQ" Server="Localhost 127.0.0.1" FilePath="C:/ayoub/ProjetBI/csv_originaux/employees.csv" Encoding="US-ASCII" FieldSeparatorValue="&quot;,&quot;" RowSeparatorValue="&quot;\n&quot;" UseHeader="true" HeaderValue="1" FirstLineCaption="true" FieldSeparatorType="Custom UTF8"/>
+  <orgomg.cwm.resource.record:RecordFile xmi:id="_meUjUVt4EfGVWtQz8uGegQ" name="default" dataManager="_meUjUFt4EfGVWtQz8uGegQ">
+    <ownedElement xsi:type="TalendMetadata:MetadataTable" xmi:id="_meUjUlt4EfGVWtQz8uGegQ" id="_eKnAsFt4EfGVWtQz8uGegQ" label="metadata">
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_meUjU1t4EfGVWtQz8uGegQ" label="employee_id" length="2" talendType="id_Integer" pattern="&quot;dd-MM-yyyy&quot;"/>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_meUjVFt4EfGVWtQz8uGegQ" label="store_id" length="3" talendType="id_Integer" pattern="&quot;dd-MM-yyyy&quot;"/>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_meUjVVt4EfGVWtQz8uGegQ" label="salary" length="5" talendType="id_Integer" pattern="&quot;dd-MM-yyyy&quot;"/>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_Q9ldAF2tEfGTwNKCMXQxIQ" name="nb_employees" label="nb_employees" length="-1" talendType="id_Integer"/>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_SulgkF2tEfGTwNKCMXQxIQ" name="avg_salary" label="avg_salary" length="-1" talendType="id_BigDecimal"/>
+    </ownedElement>
+  </orgomg.cwm.resource.record:RecordFile>
+</xmi:XMI>
