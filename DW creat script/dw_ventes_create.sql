@@ -39,28 +39,6 @@ CREATE TABLE dim_date (
 COMMENT ON TABLE dim_date IS
   'Dimension temps. Grain : un enregistrement par jour calendaire couvert par les commandes.';
 
-  -- Génère toutes les dates entre la première et la dernière commande
-INSERT INTO dim_date (
-    full_date, day_of_month, day_of_week, day_name,
-    week_of_year, month_number, month_name,
-    quarter, year, is_weekend
-)
-SELECT
-    d::DATE                                          AS full_date,
-    EXTRACT(DAY   FROM d)::SMALLINT                  AS day_of_month,
-    EXTRACT(ISODOW FROM d)::SMALLINT                 AS day_of_week,   -- 1=Lundi..7=Dimanche
-    TO_CHAR(d, 'Day')                                AS day_name,
-    EXTRACT(WEEK  FROM d)::SMALLINT                  AS week_of_year,
-    EXTRACT(MONTH FROM d)::SMALLINT                  AS month_number,
-    TO_CHAR(d, 'Month')                              AS month_name,
-    EXTRACT(QUARTER FROM d)::SMALLINT                AS quarter,
-    EXTRACT(YEAR  FROM d)::SMALLINT                  AS year,
-    EXTRACT(ISODOW FROM d) IN (6, 7)                 AS is_weekend
-FROM generate_series(
-    (SELECT MIN(order_date) FROM orders_staging),   -- date min du staging
-    (SELECT MAX(order_date) FROM orders_staging),   -- date max du staging
-    '1 day'::INTERVAL
-) AS gs(d);
 
 
 -- ============================================================
