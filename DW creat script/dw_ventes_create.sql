@@ -124,7 +124,8 @@ CREATE TABLE dim_shipment (
     shipment_key        SERIAL        PRIMARY KEY,      -- PK surrogate
     shipment_id         INTEGER       NOT NULL UNIQUE,  -- NK source
     order_id            INTEGER       NOT NULL,         -- jointure avec orders
-    status              VARCHAR(20)   NOT NULL           -- 'delivered','shipped','late'
+    status              VARCHAR(20)   NOT NULL   
+    status_label        VARCHAR(50)   NOT NULL        -- 'delivered','shipped','late'
 );
 
 COMMENT ON TABLE dim_shipment IS
